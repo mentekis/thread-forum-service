@@ -1,10 +1,16 @@
 import express from 'express';
 import { env, mongoose } from './utils';
-import { thread } from './controllers';
 import originChecker from './middleware/gateway-origin-checker.middleware';
+import { newRouter } from './transport/http';
+import { startListenMessage } from './transport/rabbitmq';
 
 // Connect to Mongo
 mongoose.mongoConnect();
+
+// Listen to rabbit mq handler
+startListenMessage()
+    .then(() => console.log("Listening to message broker"))
+    .catch((e) => console.log(e));
 
 // === Express Block ===
 const PORT = env.env.SERVICE_PORT;
@@ -14,8 +20,6 @@ const app = express();
 app.use(express.json());
 app.use(originChecker);
 
-app.get("/", thread.controller.list);
-
-app.post("/", thread.controller.create);
+newRouter(app);
 
 app.listen(PORT, () => console.log(`Service started on Port ${PORT}`));

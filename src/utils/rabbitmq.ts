@@ -6,7 +6,7 @@ type TQueueList =
     "enrichUserThreadData" |
     "updateUserData";
 
-async function newConnection() {
+export async function newConnection() {
     try {
         // Create new connection
         const conn = await amqplib.connect(env.RABBITMQ_URI);

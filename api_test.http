@@ -8,7 +8,6 @@ POST {{baseURl}}/
 Content-Type: application/json
 
 {
-    "title" : "Test ",
-    "body" : "fsdaf",
-    "username" : "andi"
+    "title" : "Test",
+    "body" : "fsdaf"
 }
