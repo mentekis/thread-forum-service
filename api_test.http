@@ -1,0 +1,14 @@
+@baseURl = http://localhost:8002
+
+### Get List of Notification
+{{baseURl}}/
+
+### Create new notification
+POST {{baseURl}}/
+Content-Type: application/json
+
+{
+    "title" : "Test ",
+    "body" : "fsdaf",
+    "username" : "andi"
+}
