@@ -17,7 +17,17 @@ const controller = {
 
     create: async (req: Request, res: Response) => {
         try {
-            const result = await thread.service.create(req);
+            // Get data from request
+            const { title, body } = req.body;
+
+            // Get user ID from locals
+            const user = res.locals.user;
+
+            const result = await thread.service.create({
+                body,
+                title,
+                userId: user._id,
+            }, user);
 
             return responseGenerator.generatedResponse(res, { data: result });
         } catch (error) {

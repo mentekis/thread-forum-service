@@ -10,7 +10,7 @@ export function newRouter(app: Application) {
     app.use(createBasePath("v1"), superGroup);
 
     // Bind all handler to superGroup
-    superGroup.use("/threads", threadRouter)
+    superGroup.use("/", threadRouter)
 }
 
 // ==== Helper Function ====== //
