@@ -1,3 +1,5 @@
+import { IUser } from "../../dto/user.dto";
+import { userService } from "../../services";
 import { rabbitmq } from "../../utils";
 
 
@@ -10,7 +12,13 @@ export async function startListenMessage() {
         // Listen to channel
         await rabbitmq.listenTo(conn, "enrichUserThreadData", (msg) => { console.log(msg.content.toString()) })
 
-        await rabbitmq.listenTo(conn, "updateUserData", (msg) => { console.log(msg.content.toString()) })
+        await rabbitmq.listenTo(conn, "updateUserData", (msg) => {
+            // Decode the data from message to object
+            const user: IUser = JSON.parse(msg.content.toString());
+
+            // Update data using user service
+            userService.update(user._id, user.name);
+        });
 
     } catch (error) {
         throw error;
