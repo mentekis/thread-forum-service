@@ -9,9 +9,9 @@ import cookieParser from 'cookie-parser';
 mongoose.mongoConnect();
 
 // Listen to rabbit mq handler
-// startListenMessage()
-//     .then(() => console.log("Listening to message broker"))
-//     .catch((e) => console.log(e));
+startListenMessage()
+    .then(() => console.log("Listening to message broker"))
+    .catch((e) => console.log(e));
 
 // === Express Block ===
 const PORT = env.env.SERVICE_PORT;

@@ -3,6 +3,13 @@ import { thread } from "../repositories";
 import { threadRequest } from "../dto/thread.dto";
 import { IUser } from "../dto/user.dto";
 import { userService } from "./user.service";
+import { z } from "zod";
+
+// Thread validation
+const threadValidatorSchema = z.object({
+    title: z.string().min(5, { message: "Minimum thread title is 5 character" }),
+    body: z.string().min(8, { message: "Minimum thread is 8 character" })
+})
 
 export const service = {
     list: async () => {
@@ -22,6 +29,14 @@ export const service = {
             currentUser = await userService.create(user._id, user.name);
         }
 
+        // Validate request
+        const validated = threadValidatorSchema.safeParse(data);
+
+        if (!validated.success) {
+            throw new Error(validated.error.errors.at(0)?.message)
+            return;
+        }
+
         return await thread.repository.create(data);
     }
-}
+} 
