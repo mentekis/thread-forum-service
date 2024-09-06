@@ -3,8 +3,7 @@ import { model, Schema } from 'mongoose';
 const schema = new Schema({
     title: String,
     body: String,
-    userId: String,
-    user: { type: Schema.Types.ObjectId, ref: "User" },
+    user: { type: Schema.Types.String, ref: "User" },
 })
 
 export const entity = model("Threads", schema);

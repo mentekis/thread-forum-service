@@ -17,7 +17,7 @@ export async function startListenMessage() {
             const user: IUser = JSON.parse(msg.content.toString());
 
             // Update data using user service
-            userService.update(user._id, user.name);
+            userService.update(user?._id, user?.name);
         });
 
     } catch (error) {

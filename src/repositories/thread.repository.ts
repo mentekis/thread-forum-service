@@ -3,22 +3,22 @@ import { Thread } from "./models"
 
 export const repository = {
     getAll: async () => {
-        const result = await Thread.entity.find();
+        const result = await Thread.find().populate("user");
 
         return result;
     },
 
     findById: async (id: string) => {
-        return await Thread.entity.findById(id);
+        return await Thread.findById(id).populate("user");
     },
 
     create: async (data: threadRequest) => {
-        const notification = new Thread.entity(data)
+        const notification = new Thread(data);
 
-        return await notification.save();
+        return (await notification.save()).populate("user");
     },
 
     update: async (id: string, data: threadRequest) => {
-        return await Thread.entity.findByIdAndUpdate(id, data);
+        return await Thread.findByIdAndUpdate(id, data);
     },
 }

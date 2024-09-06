@@ -6,8 +6,11 @@ const controller = {
     list: async (req: Request, res: Response) => {
         try {
             const result = await thread.service.list();
+            console.log("list thread", result);
 
-            return responseGenerator.generatedResponse(res, { data: result });
+            const response = thread.service.mapThreadsResponse(result);
+
+            return responseGenerator.generatedResponse(res, { data: response });
         } catch (error) {
             const issue = (error as Error).message;
 
@@ -26,10 +29,12 @@ const controller = {
             const result = await thread.service.create({
                 body,
                 title,
-                userId: user._id,
+                userId: user._id
             }, user);
 
-            return responseGenerator.generatedResponse(res, { data: result });
+            const response = thread.service.mapSingleThreadResponse(result);
+
+            return responseGenerator.generatedResponse(res, { data: response });
         } catch (error) {
             const issue = (error as Error).message;
 

@@ -1,5 +1,5 @@
 import { IUser } from "../dto/user.dto";
-import { userModel } from "./models"
+import { userModel } from "./models";
 
 export const repository = {
 
