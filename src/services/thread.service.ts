@@ -18,6 +18,12 @@ export const service = {
         return result;
     },
 
+    findById: async (threadId: string) => {
+        const result = await thread.repository.findById(threadId);
+
+        return result;
+    },
+
     create: async (data: threadRequest, user: IUser) => {
         // Find user by ID
         // Create user if not exists

@@ -1,4 +1,4 @@
-@baseURl = http://localhost:8002
+@baseURl = http://localhost:8004
 
 ### Get List of Notification
 {{baseURl}}/
@@ -8,6 +8,6 @@ POST {{baseURl}}/
 Content-Type: application/json
 
 {
-    "title" : "Test",
-    "body" : "fsdaf"
+    "threadId" : "asdfklvaslkdfjas",
+    "body" : "fsdaf",
 }

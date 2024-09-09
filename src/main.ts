@@ -1,9 +1,9 @@
-import express from 'express';
-import { env, mongoose } from './utils';
-import originChecker from './middleware/gateway-origin-checker.middleware';
-import { newRouter } from './transport/http';
-import { startListenMessage } from './transport/rabbitmq';
-import cookieParser from 'cookie-parser';
+import express from "express";
+import { env, mongoose } from "./utils";
+import originChecker from "./middleware/gateway-origin-checker.middleware";
+import { newRouter } from "./transport/http";
+import { startListenMessage } from "./transport/rabbitmq";
+import cookieParser from "cookie-parser";
 
 // Connect to Mongo
 mongoose.mongoConnect();
@@ -20,7 +20,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(originChecker);
+app.use(originChecker);
 
 newRouter(app);
 
