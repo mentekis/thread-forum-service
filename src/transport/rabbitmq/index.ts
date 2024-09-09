@@ -20,7 +20,7 @@ export async function startListenMessage() {
             userService.update(user?._id, user?.name);
         });
 
-        await rabbitmq.listenTo("newReply", async (msg) => {
+        await rabbitmq.listenTo("newNotificationReply", async (msg) => {
             // Decode data
             const { threadId } = JSON.parse(msg.content.toString());
 
@@ -34,10 +34,10 @@ export async function startListenMessage() {
 
             // Emit event to enrich data for notification
             // Only send thread title
-            await rabbitmq.emitEventTo("enrichThreadNotifData", JSON.stringify({
+            await rabbitmq.emitEventTo("enrichThreadNotifData", {
                 threadId: data._id,
                 title: data.title,
-            }));
+            });
 
         })
 
