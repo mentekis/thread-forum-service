@@ -36,12 +36,12 @@ export const userService = {
 
     },
 
-    mapUserResponse: (user: any): IUser => {
+    mapUserResponse: (user: IUser): IUser => {
         return mapSingleUser(user);
     }
 }
 
-const mapSingleUser = (user: any): IUser => {
+const mapSingleUser = (user: IUser): IUser => {
     return {
         _id: user._id,
         name: user.name

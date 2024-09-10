@@ -1,4 +1,4 @@
-import { response, Response } from "express";
+import { Response } from "express";
 
 interface responseOption<T> {
     status?: number;
@@ -7,10 +7,10 @@ interface responseOption<T> {
     cookies?: [string, string][];
 }
 
-interface responseStructure {
+interface responseStructure<T> {
     success: boolean;
     message: string;
-    data: any
+    data: object | null | T;
 }
 
 export function generatedResponse<T>(res: Response, options?: responseOption<T>) {
@@ -24,7 +24,7 @@ export function generatedResponse<T>(res: Response, options?: responseOption<T>)
     const data: T | null = options?.data || null;
 
     // Construct final response structure
-    const response: responseStructure = {
+    const response: responseStructure<T> = {
         success: (status >= 200 && status < 300),
         message,
         data,

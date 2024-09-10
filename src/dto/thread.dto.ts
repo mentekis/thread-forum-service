@@ -12,5 +12,5 @@ export interface IThreadResponse {
     _id: Types.ObjectId;
     title: string;
     body: string;
-    user: IUser;
+    user?: IUser | null;
 }

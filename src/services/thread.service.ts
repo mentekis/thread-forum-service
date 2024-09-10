@@ -1,4 +1,3 @@
-import { Request } from "express";
 import { thread } from "../repositories";
 import { IThreadResponse, threadRequest } from "../dto/thread.dto";
 import { IUser } from "../dto/user.dto";
@@ -52,20 +51,20 @@ export const service = {
         return await thread.repository.create(data);
     },
 
-    mapSingleThreadResponse: (thread: any): IThreadResponse => {
+    mapSingleThreadResponse: (thread: IThreadResponse): IThreadResponse => {
         return mapSingleThread(thread);
     },
 
-    mapThreadsResponse: (threads: any[]): IThreadResponse[] => {
+    mapThreadsResponse: (threads: IThreadResponse[]): IThreadResponse[] => {
         return threads.map((thread) => mapSingleThread(thread));
     }
 }
 
-const mapSingleThread = (thread: any): IThreadResponse => {
+const mapSingleThread = (thread: IThreadResponse): IThreadResponse => {
     return {
         _id: thread._id,
         title: thread.title,
         body: thread.body,
-        user: userService.mapUserResponse(thread.user),
+        user: thread.user ? userService.mapUserResponse(thread.user) : null,
     }
 }

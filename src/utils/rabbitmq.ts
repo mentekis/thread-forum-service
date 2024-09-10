@@ -26,7 +26,7 @@ export async function newConnection() {
     }
 }
 
-export async function listenTo(queue: TQueueList, duty: (msg: amqplib.Message) => void | Promise<any>) {
+export async function listenTo(queue: TQueueList, duty: (msg: amqplib.Message) => void | Promise<void>) {
     try {
         // Create new channel fro connection
         // Create new connection if caller use null connection
